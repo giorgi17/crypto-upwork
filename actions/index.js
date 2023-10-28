@@ -75,14 +75,7 @@ const createToken = async (Token, User, Filter) => {
     console.log('matchedFilters', matchedFilters);
 
     // Saving new token to db
-    Token.create({
-        id: 1,
-        name: 'Crypto',
-        address: '123 Main St',
-        signal_x: true,
-        signal_y: false,
-        signal_z: true,
-    })
+    Token.create(newTokenData)
         .then(token => {
             console.log('New token created:', token.toJSON());
         })
