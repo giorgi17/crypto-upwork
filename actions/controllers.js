@@ -1,6 +1,9 @@
+const Token = require('../models/token');
+const Filter = require('../models/filter');
+const User = require('../models/user');
 const helpers = require('./helpers');
 
-const createUser = (User, data) => {
+const createUser = data => {
     User.create(data)
         .then(user => {
             console.log('New user created:', user.toJSON());
@@ -10,7 +13,7 @@ const createUser = (User, data) => {
         });
 };
 
-const createFilter = (Filter, data) => {
+const createFilter = data => {
     Filter.create(data)
         .then(filter => {
             console.log('New filter created:', filter.toJSON());
@@ -20,18 +23,18 @@ const createFilter = (Filter, data) => {
         });
 };
 
-const createToken = async (Token, Filter, data) => {
+const createToken = async data => {
     Token.create(data)
         .then(token => {
             console.log('New token created:', token.toJSON());
-            helpers.filterMethod(Filter, Token, data.id);
+            helpers.filterMethod(data.id);
         })
         .catch(error => {
             console.error('Error creating token!');
         });
 };
 
-const updateToken = async (Token, Filter, data) => {
+const updateToken = async data => {
     Token.update(
         { ...data.dataToUpdate }, // New data to set
         {
@@ -41,7 +44,7 @@ const updateToken = async (Token, Filter, data) => {
         .then(([rowsUpdated]) => {
             if (rowsUpdated > 0) {
                 console.log('Token updated successfully');
-                helpers.filterMethod(Filter, Token, data.id);
+                helpers.filterMethod(data.id);
             } else {
                 console.log('No Tokens were updated.');
             }

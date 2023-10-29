@@ -1,6 +1,8 @@
+const Filter = require('../models/filter');
+const Token = require('../models/token');
 const dummyData = require('./dummyData');
 
-const filterMethod = async (Filter, Token, tokenId) => {
+const filterMethod = async tokenId => {
     const matchedFilters = [];
 
     try {
