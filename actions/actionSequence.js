@@ -1,5 +1,5 @@
-const controllers = require('../actions/controllers');
-const dummyData = require('../actions/dummyData');
+const controllers = require('./controllers');
+const dummyData = require('./dummyData');
 
 const actionSequence = async () => {
     try {
