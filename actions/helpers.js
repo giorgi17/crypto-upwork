@@ -2,7 +2,7 @@ const Filter = require('../models/filter');
 const Token = require('../models/token');
 const dummyData = require('./dummyData');
 
-const filterMethod = async tokenId => {
+const filterMethod = async (tokenId, actionName) => {
     const matchedFilters = [];
 
     try {
@@ -64,7 +64,10 @@ const filterMethod = async tokenId => {
         console.log("Couldn't perform filtering!", error);
     }
 
-    console.log('matchedFilters', matchedFilters);
+    console.log(
+        `matchedFilters for TokenId - ${tokenId}, action - ${actionName}`,
+        matchedFilters
+    );
     return matchedFilters;
 };
 

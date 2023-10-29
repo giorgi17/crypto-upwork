@@ -27,7 +27,7 @@ const createToken = async data => {
     Token.create(data)
         .then(token => {
             console.log('New token created:', token.toJSON());
-            helpers.filterMethod(data.id);
+            helpers.filterMethod(data.id, 'Create');
         })
         .catch(error => {
             console.error('Error creating token!');
@@ -44,7 +44,7 @@ const updateToken = async data => {
         .then(([rowsUpdated]) => {
             if (rowsUpdated > 0) {
                 console.log('Token updated successfully');
-                helpers.filterMethod(data.id);
+                helpers.filterMethod(data.id, 'Update');
             } else {
                 console.log('No Tokens were updated.');
             }
