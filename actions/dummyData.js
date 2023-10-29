@@ -88,6 +88,21 @@ const fieldsToFilter = [
     'signal_string',
 ];
 
+// ADDED
+const updateToken4Data = {
+    id: 1,
+    dataToUpdate: {
+        signal_string: 'aaa',
+    },
+};
+
+const filter4Data = {
+    id: 4,
+    filterName: 'sxx2',
+    signal_string: 'aaa',
+    userId: 1, // Id of the user this filter should belong to
+};
+
 module.exports = {
     user1Data,
     user2Data,
@@ -100,4 +115,6 @@ module.exports = {
     updateToken2Data,
     filter3Data,
     updateToken3Data,
+    updateToken4Data,
+    filter4Data,
 };
