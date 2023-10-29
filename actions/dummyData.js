@@ -85,6 +85,7 @@ const fieldsToFilter = [
     'signal_y',
     'signal_z',
     'signal_int',
+    'signal_string',
 ];
 
 module.exports = {

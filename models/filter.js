@@ -29,6 +29,9 @@ const Filter = sequelize.define('filter', {
     signal_int: {
         type: DataTypes.JSONB,
     },
+    signal_string: {
+        type: DataTypes.STRING,
+    },
 });
 
 module.exports = Filter;
