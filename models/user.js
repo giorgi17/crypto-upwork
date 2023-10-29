@@ -5,6 +5,7 @@ const User = db =>
         id: {
             type: DataTypes.BIGINT,
             primaryKey: true,
+            allowNull: false
         },
         email: {
             type: DataTypes.STRING,

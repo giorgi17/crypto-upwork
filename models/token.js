@@ -21,6 +21,7 @@ const Token = db =>
         signal_z: {
             type: DataTypes.BOOLEAN,
         },
+        signal_int: { type: DataTypes.INTEGER },
     });
 
 module.exports = Token;

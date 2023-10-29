@@ -4,12 +4,10 @@ const Filter = require('../models/filter');
 const Token = require('../models/token');
 
 const actions = require('../actions');
+const dummyData = require('../actions/dummyData');
 
 // Initialize Sequelize with PostgreSQL
 const sequelize = new Sequelize('crypto', 'postgres', 'giorgi123', {
-    database: 'crypto',
-    username: 'postgres',
-    password: 'giorgi123',
     dialect: 'postgres',
     logging: false,
 });
@@ -17,7 +15,6 @@ const sequelize = new Sequelize('crypto', 'postgres', 'giorgi123', {
 const dbConnection = async () => {
     try {
         await sequelize.authenticate();
-        sequelize.options.logging = false;
         console.log('Connection has been established successfully.');
 
         const userModel = User(sequelize);
@@ -32,10 +29,42 @@ const dbConnection = async () => {
 
         await sequelize.sync();
 
-        // Performing actions
-        actions.creatingUser(userModel);
-        actions.createFilter(filterModel);
-        actions.createToken(tokenModel, userModel, filterModel);
+        ////////// Performing actions
+        // Creating first tokens
+        actions.createToken(tokenModel, filterModel, dummyData.token1Data);
+        actions.createToken(tokenModel, filterModel, dummyData.token2Data);
+
+        // Creating users
+        actions.createUser(userModel, dummyData.user1Data);
+        actions.createUser(userModel, dummyData.user2Data);
+
+        // Creating first 2 filters
+        actions.createFilter(filterModel, dummyData.filter1Data);
+        actions.createFilter(filterModel, dummyData.filter2Data);
+
+        // First token update
+        actions.updateToken(
+            tokenModel,
+            filterModel,
+            dummyData.updateToken1Data
+        );
+
+        // Second token update
+        actions.updateToken(
+            tokenModel,
+            filterModel,
+            dummyData.updateToken2Data
+        );
+
+        // Creating new user1 filter
+        actions.createFilter(filterModel, dummyData.filter3Data);
+
+        // Updating first token's "signal_int"
+        actions.updateToken(
+            tokenModel,
+            filterModel,
+            dummyData.updateToken3Data
+        );
     } catch (error) {
         console.error('Unable to connect to the database:', error);
     }

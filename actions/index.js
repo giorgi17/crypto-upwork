@@ -1,87 +1,54 @@
-const creatingUser = User => {
-    User.create({
-        id: 1,
-        email: 'newuser@example.com',
-        fullName: 'New User',
-    })
+const helpers = require('./helpers');
+
+const createUser = (User, data) => {
+    User.create(data)
         .then(user => {
             console.log('New user created:', user.toJSON());
         })
         .catch(error => {
-            console.error('Error creating user:', error);
+            console.error('Error creating user!');
         });
 };
 
-const createFilter = Filter => {
-    Filter.create({
-        id: 17,
-        name: 'Crypto',
-        address: '123 Main St',
-        signal_x: true,
-        signal_y: false,
-        signal_z: true,
-        userId: 1, // Id of the user this filter should belong to
-    })
+const createFilter = (Filter, data) => {
+    Filter.create(data)
         .then(filter => {
             console.log('New filter created:', filter.toJSON());
         })
         .catch(error => {
-            console.error('Error creating filter:', error);
+            console.error('Error creating filter!');
         });
 };
 
-const createToken = async (Token, User, Filter) => {
-    const newTokenData = {
-        id: 1,
-        name: 'Crypto',
-        address: '123 Main St',
-        signal_x: true,
-        signal_y: false,
-        signal_z: true,
-    };
-
-    // Fetching user filters
-    const user = await User.findByPk(1, {
-        include: {
-            model: Filter,
-            as: 'filters',
-        },
-    });
-
-    // Gather the properties of all user's filters
-    const userFilters = user?.filters.map(filter => filter.toJSON());
-
-    const matchedFilters = [];
-
-    // Checking new token data against user filters
-    if (userFilters) {
-        for (const filter of userFilters) {
-            if (
-                filter.name === newTokenData.name &&
-                filter.address === newTokenData.address &&
-                filter.signal_x === newTokenData.signal_x &&
-                filter.signal_y === newTokenData.signal_y &&
-                filter.signal_z === newTokenData.signal_z
-            ) {
-                matchedFilters.push({
-                    filterId: filter.id,
-                    matchedTokenData: newTokenData,
-                });
-            }
-        }
-    }
-
-    // Logging all the instances where stored filters match the new token data.
-    console.log('matchedFilters', matchedFilters);
-
-    // Saving new token to db
-    Token.create(newTokenData)
+const createToken = async (Token, Filter, data) => {
+    Token.create(data)
         .then(token => {
             console.log('New token created:', token.toJSON());
+            helpers.filterMethod(Filter, Token, data.id);
         })
         .catch(error => {
-            console.error('Error creating token:', error);
+            console.error('Error creating token!');
         });
 };
 
-module.exports = { creatingUser, createFilter, createToken };
+const updateToken = async (Token, Filter, data) => {
+    Token.update(
+        { ...data.dataToUpdate }, // New data to set
+        {
+            where: { id: data.id }, // The condition to identify the record to update
+        }
+    )
+        .then(([rowsUpdated]) => {
+            if (rowsUpdated > 0) {
+                console.log('Token updated successfully');
+                helpers.filterMethod(Filter, Token, data.id);
+            } else {
+                console.log('No Tokens were updated.');
+            }
+        })
+        .catch(error => {
+            console.error('Error updating Token!');
+        });
+};
+
+module.exports = { createUser, createFilter, createToken, updateToken };

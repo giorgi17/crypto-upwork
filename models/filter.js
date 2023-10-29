@@ -5,6 +5,11 @@ const Filter = db =>
         id: {
             type: DataTypes.BIGINT,
             primaryKey: true,
+            allowNull: false,
+        },
+        filterName: {
+            type: DataTypes.STRING,
+            allowNull: false,
         },
         name: {
             type: DataTypes.STRING,
@@ -20,6 +25,9 @@ const Filter = db =>
         },
         signal_z: {
             type: DataTypes.BOOLEAN,
+        },
+        signal_int: {
+            type: DataTypes.JSONB,
         },
     });
 
