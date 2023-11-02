@@ -1,6 +1,6 @@
 const express = require('express');
 const { sequelize, pg_db } = require('./utils/database');
-const actionSequence = require('./actions/actionSequence');
+const { actionSequence, actionSequence2 } = require('./actions/actionSequence');
 const User = require('./models/user');
 const Filter = require('./models/filter');
 const Token = require('./models/token');
@@ -32,6 +32,7 @@ sequelize
         console.log('Database connection has been established successfully.');
         // Executing action sequence
         actionSequence();
+        actionSequence2();
 
         server.listen(3000, () => console.log('Server running!'));
     })

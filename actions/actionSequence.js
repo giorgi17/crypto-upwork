@@ -32,4 +32,23 @@ const actionSequence = async () => {
     }
 };
 
-module.exports = actionSequence;
+const actionSequence2 = async () => {
+    try {
+        // Creating first tokens
+        controllers.createToken(dummyData.token3Data);
+        controllers.createToken(dummyData.token4Data);
+        controllers.createToken(dummyData.token5Data);
+
+        // Creating filters
+        controllers.createFilter(dummyData.filter5Data);
+        controllers.createFilter(dummyData.filter6Data);
+        controllers.createFilter(dummyData.filter7Data);
+        controllers.createFilter(dummyData.filter8Data);
+        controllers.createFilter(dummyData.filter9Data);
+        controllers.createFilter(dummyData.filter10Data);
+    } catch (error) {
+        console.error('Error while performing action sequence2!');
+    }
+};
+
+module.exports = { actionSequence, actionSequence2 };

@@ -25,6 +25,9 @@ const Token = sequelize.define('token', {
     signal_string: {
         type: DataTypes.STRING,
     },
+    signal_source: {
+        type: DataTypes.STRING,
+    },
 });
 
 module.exports = Token;

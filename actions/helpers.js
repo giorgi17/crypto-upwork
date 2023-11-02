@@ -44,6 +44,16 @@ const filterMethod = async (tokenId, actionName) => {
                                 break;
                             }
                         }
+                    } else if (key === 'signal_source') {
+                        const sourceMatched = sourceFilter(
+                            item[key],
+                            tokenData
+                        );
+
+                        if (!sourceMatched) {
+                            matched = false;
+                            break;
+                        }
                     } else if (item[key] !== tokenData[key]) {
                         matched = false;
                         break;
@@ -69,6 +79,29 @@ const filterMethod = async (tokenId, actionName) => {
         matchedFilters
     );
     return matchedFilters;
+};
+
+const sourceFilter = (sourceConditions, tokenData) => {
+    let isMatched = false;
+    const key = 'signal_source';
+
+    sourceConditions.forEach(sourceItem => {
+        if (sourceItem.case === 'or') {
+            if (sourceItem.value === tokenData[key]) {
+                isMatched = true;
+            }
+        } else if (sourceItem.case === 'not') {
+            if (sourceItem.value === tokenData[key]) {
+                isMatched = false;
+                return isMatched;
+            } else {
+                isMatched = true;
+                return isMatched;
+            }
+        }
+    });
+
+    return isMatched;
 };
 
 module.exports = { filterMethod };
