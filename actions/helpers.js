@@ -44,13 +44,13 @@ const filterMethod = async (tokenId, actionName) => {
                                 break;
                             }
                         }
-                    } else if (key === 'signal_source') {
-                        const sourceMatched = sourceFilter(
+                    } else if (key === 'signal_origin') {
+                        const originMatched = originFilter(
                             item[key],
                             tokenData
                         );
 
-                        if (!sourceMatched) {
+                        if (!originMatched) {
                             matched = false;
                             break;
                         }
@@ -81,25 +81,24 @@ const filterMethod = async (tokenId, actionName) => {
     return matchedFilters;
 };
 
-const sourceFilter = (sourceConditions, tokenData) => {
+const originFilter = (originConditions, tokenData) => {
     let isMatched = false;
-    const key = 'signal_source';
+    const key = 'signal_origin';
 
-    sourceConditions.forEach(sourceItem => {
-        if (sourceItem.case === 'or') {
-            if (sourceItem.value === tokenData[key]) {
+    for (const originItem of originConditions) {
+        if (originItem.case === 'or') {
+            if (originItem.value === tokenData[key]) {
                 isMatched = true;
             }
-        } else if (sourceItem.case === 'not') {
-            if (sourceItem.value === tokenData[key]) {
+        } else if (originItem.case === 'not') {
+            if (originItem.value === tokenData[key]) {
                 isMatched = false;
                 return isMatched;
             } else {
                 isMatched = true;
-                return isMatched;
             }
         }
-    });
+    }
 
     return isMatched;
 };

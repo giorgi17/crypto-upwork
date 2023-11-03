@@ -40,7 +40,7 @@ const token3Data = {
     signal_y: false,
     signal_z: true,
     signal_int: 200,
-    signal_source: 'google',
+    signal_origin: 'google',
 };
 
 const token4Data = {
@@ -51,7 +51,7 @@ const token4Data = {
     signal_y: false,
     signal_z: true,
     signal_int: 200,
-    signal_source: 'bing',
+    signal_origin: 'bing',
 };
 
 const token5Data = {
@@ -62,7 +62,7 @@ const token5Data = {
     signal_y: false,
     signal_z: true,
     signal_int: 200,
-    signal_source: 'yahoo',
+    signal_origin: 'yahoo',
 };
 
 // Filters data
@@ -98,7 +98,7 @@ const filter4Data = {
 const filter5Data = {
     id: 5,
     filterName: 'sxx3',
-    signal_source: [
+    signal_origin: [
         { case: 'or', value: 'google' },
         { case: 'or', value: 'bing' },
         { case: 'not', value: 'yahoo' },
@@ -109,7 +109,7 @@ const filter5Data = {
 const filter6Data = {
     id: 6,
     filterName: 'sxx4',
-    signal_source: [
+    signal_origin: [
         { case: 'or', value: 'google' },
         { case: 'or', value: 'bing' },
         { case: 'or', value: 'yahoo' },
@@ -120,7 +120,7 @@ const filter6Data = {
 const filter7Data = {
     id: 7,
     filterName: 'sxx5',
-    signal_source: [
+    signal_origin: [
         { case: 'or', value: 'google' },
         { case: 'or', value: 'bing' },
     ],
@@ -130,7 +130,7 @@ const filter7Data = {
 const filter8Data = {
     id: 8,
     filterName: 'sxx6',
-    signal_source: [
+    signal_origin: [
         { case: 'or', value: 'google' },
         { case: 'or', value: 'bing' },
     ],
@@ -140,14 +140,24 @@ const filter8Data = {
 const filter9Data = {
     id: 9,
     filterName: 'sxx7',
-    signal_source: [{ case: 'not', value: 'google' }],
+    signal_origin: [{ case: 'not', value: 'google' }],
     userId: 1, // Id of the user this filter should belong to
 };
 
 const filter10Data = {
     id: 10,
     filterName: 'sxx8',
-    signal_source: [{ case: 'or', value: 'google' }],
+    signal_origin: [{ case: 'or', value: 'google' }],
+    userId: 1, // Id of the user this filter should belong to
+};
+
+const filter11Data = {
+    id: 11,
+    filterName: 'sxx9',
+    signal_origin: [
+        { case: 'not', value: 'yahoo' },
+        { case: 'not', value: 'google' },
+    ],
     userId: 1, // Id of the user this filter should belong to
 };
 
@@ -189,7 +199,7 @@ const fieldsToFilter = [
     'signal_z',
     'signal_int',
     'signal_string',
-    'signal_source',
+    'signal_origin',
 ];
 
 module.exports = {
@@ -210,6 +220,7 @@ module.exports = {
     filter8Data,
     filter9Data,
     filter10Data,
+    filter11Data,
     updateToken1Data,
     updateToken2Data,
     updateToken3Data,

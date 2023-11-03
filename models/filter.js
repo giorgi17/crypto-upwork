@@ -32,7 +32,7 @@ const Filter = sequelize.define('filter', {
     signal_string: {
         type: DataTypes.STRING,
     },
-    signal_source: {
+    signal_origin: {
         type: DataTypes.JSONB,
     },
 });

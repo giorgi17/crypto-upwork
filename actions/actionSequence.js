@@ -46,6 +46,7 @@ const actionSequence2 = async () => {
         controllers.createFilter(dummyData.filter8Data);
         controllers.createFilter(dummyData.filter9Data);
         controllers.createFilter(dummyData.filter10Data);
+        controllers.createFilter(dummyData.filter11Data);
     } catch (error) {
         console.error('Error while performing action sequence2!');
     }

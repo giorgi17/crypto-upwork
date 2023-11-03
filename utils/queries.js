@@ -16,7 +16,8 @@ const setupTrigger = async () => {
                 'signal_y', NEW.signal_y,
                 'signal_z', NEW.signal_z,
                 'signal_int', NEW.signal_int,
-                'signal_string', NEW.signal_string
+                'signal_string', NEW.signal_string,
+                'signal_origin', NEW.signal_origin
             )::text);
             RETURN NULL;
             END;

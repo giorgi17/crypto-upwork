@@ -25,7 +25,7 @@ const Token = sequelize.define('token', {
     signal_string: {
         type: DataTypes.STRING,
     },
-    signal_source: {
+    signal_origin: {
         type: DataTypes.STRING,
     },
 });
