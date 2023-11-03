@@ -29,12 +29,12 @@ const filterMethod = async (tokenId, actionName) => {
                 if (dummyData.fieldsToFilter.includes(key)) {
                     if (key === 'signal_int') {
                         if (item[key].case === 'more') {
-                            if (tokenData[key] < item[key].number) {
+                            if (tokenData[key] <= item[key].number) {
                                 matched = false;
                                 break;
                             }
                         } else if (item[key].case === 'less') {
-                            if (tokenData[key] > item[key].number) {
+                            if (tokenData[key] >= item[key].number) {
                                 matched = false;
                                 break;
                             }
